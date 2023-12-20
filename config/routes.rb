@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'lectures/create'
+  get 'lectures/destroy'
+  get 'favorites/create'
+  get 'favorites/destroy'
   get 'mangas/index'
   get 'mangas/show'
   devise_for :users

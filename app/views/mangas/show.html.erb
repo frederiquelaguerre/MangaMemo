@@ -1,2 +1,56 @@
-<h1>Mangas#show</h1>
-<p>Find me in app/views/mangas/show.html.erb</p>
+
+
+
+ <div class="cover-container">
+    <img class="cover-image" src="<%= @manga.couverture %>" alt="">
+    <h2 class="name"><%= @manga.nom %></h2>
+</div>
+
+  <ul class="nav justify-content-center" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button style="margin-right: 90px;" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">À PROPOS</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">CHAPITRES</button>
+    </li>
+  </ul>
+
+
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="container p-3">
+        <p><%= @manga.synopsys %></p>
+        <div class="border-bottom"></div>
+        <p><%= @manga.auteur %></p>
+        <p><%= @manga.statut %></p>
+        <p><%= @manga.note_moyenne %></p>
+      </div>
+    </div>
+
+   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+  <h3>Liste des Chapitres</h3>
+
+  <% manga_cover_url = @manga.couverture %>
+
+  <% @chapitres.each do |chapitre| %>
+  <div class="container">
+    <div class="card-chapitre">
+      <img src="<%= @manga.couverture %>" alt="">
+      <h5>Chapitre <%= chapitre.numero_chapitre %></h5>
+
+      <% lecture = current_user.lectures.find_by(chapitre_id: chapitre.id) %>
+      <% if lecture.present? %>
+        <% if lecture.lu %>
+          <%= link_to "Marquer comme non lu","#", method: :post %>
+        <% else %>
+          <%= link_to "Marquer comme lu", "#", method: :post %>
+        <% end %>
+      <% else %>
+        <%= link_to "Commencer la lecture", "#", method: :post %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+</div>

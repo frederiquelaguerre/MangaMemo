@@ -56,6 +56,21 @@ anime_ids.each do |anime_id|
       chapitre: anime_data['information']['chapters']
     )
     puts "Structure des données : #{anime_data}"
+
+    # Créez des instances de la classe Chapitre associées à ce manga
+(1..anime_data['information']['chapters'].to_i).each do |chapitre_numero|
+  manga = Manga.find_by(nom: anime_data['title_ov'])
+  chapitre = Chapitre.find_by(manga: manga, numero_chapitre: chapitre_numero)
+
+  unless chapitre
+    Chapitre.create!(
+      titre: "Chapitre #{chapitre_numero}",
+      numero_chapitre: chapitre_numero,
+      manga: manga
+    )
+  end
+end
+
 # puts "Volumes : #{anime_data['information']['type'][0]['volumes']}"
 # puts "Chapitres : #{anime_data['information']['type'][0]['chapters']}"
 

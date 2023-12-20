@@ -1,4 +1,17 @@
 <h1>Mangas#index</h1>
+<div class="container mt-5 text-center">
+    <%= form_with url: mangas_path, method: :get, class: "d-flex" do %>
+      <%= text_field_tag :query,
+            params[:query],
+            class: "input",
+            placeholder: "Rechercher un manga par nom, par auteur..."
+        %>
+        <button class="loupe-index" type="submit">
+          <i class="fa-solid fa-magnifying-glass fa-lg" style="color: #7f7f7f;"></i>
+        </button>
+    <% end %>
+  </div>
+
 <div class="cards">
   <% @mangas.each do |manga|%>
     <%= link_to manga_path(manga), class:"text-decoration-none", style:"color: inherit" do %>
