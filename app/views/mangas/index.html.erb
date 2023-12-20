@@ -1,0 +1,28 @@
+<h1>Mangas#index</h1>
+<div class="cards">
+  <% @mangas.each do |manga|%>
+    <%= link_to manga_path(manga), class:"text-decoration-none", style:"color: inherit" do %>
+      <% if manga.nom.present? && manga.synopsys.present? && manga.couverture.present? %>
+        <div class="cards">
+          <article class="information [ card ]">
+          <img src="<%= manga.couverture %>" class="card-image" alt="...">
+          <span class="tag"><%= manga.statut %></span>
+            <h2 class="title"><%= manga.nom %></h2>
+            <p class="info"><%= truncate(manga.synopsys, length: 100) %></p>
+            <dl class="details">
+              <div>
+                <dt>Mangaka</dt>
+                <dd><%= manga.auteur %></dd>
+              </div>
+              <div>
+                <dt>Note</dt>
+                <dd><%= manga.note_moyenne %></dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
